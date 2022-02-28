@@ -10,3 +10,9 @@ export const config = {
   apiVersion: '2021-03-25',
   useCdn: process.env.NODE_ENV === 'production',
 }
+
+// Set up the ient for fetching data in the getProps page functions
+export const sanityClient = createClient(config)
+
+// Set up helper function for generating image URLs with only the asset reference data in your documents
+export const urlFor = (source) => createImageUrlBuilder(config).image(source)
