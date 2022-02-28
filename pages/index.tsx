@@ -23,13 +23,13 @@ function Home({ posts }: Props) {
       <Banner />
 
       {/* Post here */}
-      <div className="lg:grid-cols-3 grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6">
+      <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
         {posts.map((post) => (
           <Link key={post._id} href={`/post/${post.slug.current}`}>
-            <div className="group cursor-pointer overflow-hidden rounded-lg border-2">
+            <div className="group cursor-pointer overflow-hidden rounded-lg border-2 duration-500 hover:shadow-2xl">
               {/* ! mark to ensure the scr is not null */}
               <img
-                className="duration-400 h-60 w-full object-cover transition-transform ease-in-out group-hover:scale-105"
+                className="h-60 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                 src={urlFor(post.mainImage).url()!}
                 alt="main post img"
               />
