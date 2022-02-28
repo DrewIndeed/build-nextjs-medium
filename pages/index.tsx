@@ -10,7 +10,7 @@ interface Props {
 }
 
 function Home({ posts }: Props) {
-  console.log(posts);
+  console.log(posts)
   return (
     <div className="mx-auto max-w-7xl">
       <Head>
@@ -23,15 +23,32 @@ function Home({ posts }: Props) {
       <Banner />
 
       {/* Post here */}
-      <div>
-        {posts.map(post => (
+      <div className="lg:grid-cols-3 grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6">
+        {posts.map((post) => (
           <Link key={post._id} href={`/post/${post.slug.current}`}>
-            <div>
+            <div className="group cursor-pointer overflow-hidden rounded-lg border-2">
               {/* ! mark to ensure the scr is not null */}
-              <img src={ urlFor(post.mainImage).width(500).height(300).url()! } alt="main post img" />
+              <img
+                className="duration-400 h-60 w-full object-cover transition-transform ease-in-out group-hover:scale-105"
+                src={urlFor(post.mainImage).url()!}
+                alt="main post img"
+              />
+
+              <div className="flex justify-between bg-white p-5">
+                <div>
+                  <p className="font-serif text-lg font-bold">{post.title}</p>
+                  <p className="font-serif text-xs">{post.description}</p>
+                </div>
+
+                <img
+                  className="h-12 w-12 rounded-full object-cover"
+                  src={urlFor(post.author.image).url()!}
+                  alt="main post img"
+                />
+              </div>
             </div>
           </Link>
-        )) }
+        ))}
       </div>
     </div>
   )
