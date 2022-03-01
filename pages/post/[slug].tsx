@@ -23,7 +23,7 @@ function Post({ post }: Props) {
       />
 
       {/* Article here */}
-      <article className="mx-auto my-5 max-w-5xl border border-y-0 border-x-2 border-green-400 px-10 py-8">
+      <article className="mx-auto my-5 max-w-5xl border border-y-0 border-x-2 border-green-200 px-10 py-8">
         {/* Title and Description */}
         <h1 className="mb-3 text-5xl font-bold ">{post.title}</h1>
         <h2 className="mb-3 text-lg italic text-gray-600">
@@ -77,6 +77,43 @@ function Post({ post }: Props) {
           />
         </div>
       </article>
+
+      <hr className="my-10 mx-auto max-w-3xl border-2 border-yellow-200" />
+
+      {/* Comment section */}
+      <form className="mx-auto mb-10 flex max-w-3xl flex-col p-5 duration-500 hover:shadow-2xl">
+        <h3 className="text-md text-yellow-500">Enjoy this article</h3>
+        <h4 className="font-bond text-3xl">Leave a comment below!</h4>
+        <hr className="mt-2 py-3" />
+
+        <label className="mb-5 block">
+          <span className="text-gray-600">Name</span>
+          <input
+            type="text"
+            placeholder="Be here for a while"
+            className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
+          />
+        </label>
+
+        <label className="mb-5 block">
+          <span className="text-gray-600">Email</span>
+          <input
+            type="text"
+            placeholder="Be here for a while"
+            className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
+          />
+        </label>
+
+        <label className="mb-5 block">
+          <span className="text-gray-600">Comment</span>
+          <textarea
+            style={{ resize: 'none' }}
+            rows={8}
+            placeholder="Be here for a while"
+            className="form-textarea mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
+          />
+        </label>
+      </form>
     </main>
   )
 }
