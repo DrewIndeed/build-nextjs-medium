@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
+import PortableText from 'react-portable-text'
 import Header from '../../components/Header'
 import { sanityClient, urlFor } from '../../sanity'
 import { Post } from '../../typings'
@@ -11,7 +12,7 @@ interface Props {
 function Post({ post }: Props) {
   console.log(post)
   return (
-    <main className="mx-auto max-w-7xl">
+    <main className="mx-auto max-w-7xl scrollbar-hide">
       <Header />
 
       {/* Banner here */}
@@ -22,7 +23,7 @@ function Post({ post }: Props) {
       />
 
       {/* Article here */}
-      <article className="mx-auto mt-5 max-w-3xl border border-y-0 border-x-2 p-8">
+      <article className="mx-auto my-5 max-w-5xl border border-y-0 border-x-2 border-green-400 px-10 py-8">
         {/* Title and Description */}
         <h1 className="mb-3 text-5xl font-bold ">{post.title}</h1>
         <h2 className="mb-3 text-lg italic text-gray-600">
@@ -30,7 +31,7 @@ function Post({ post }: Props) {
         </h2>
 
         {/* Article author and posted datetime */}
-        <div className="flex items-center space-x-3">
+        <div className="mb-5 flex items-center space-x-3">
           <img
             className="h-12 w-12 rounded-full object-cover"
             src={urlFor(post.author.image).url()}
@@ -43,6 +44,38 @@ function Post({ post }: Props) {
         </div>
 
         {/* Article body */}
+        <div>
+          <PortableText
+            className=""
+            dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
+            projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!}
+            content={post.body}
+            serializers={{
+              h1: (props: any) => (
+                <h1 className="my-5 text-2xl font-bold" {...props} />
+              ),
+              h2: (props: any) => (
+                <h2 className="my-5 text-xl font-bold" {...props} />
+              ),
+              h4: (props: any) => (
+                <h4 className="my-3 text-justify" {...props} />
+              ),
+              li: ({ children }: any) => (
+                <li className="ml-4 list-disc">{children}</li>
+              ),
+
+              link: ({ href, children }: any) => (
+                <a href={href} className="text-blue-500 hover:underline">
+                  {children}
+                </a>
+              ),
+            }}
+            imageOptions={{
+              height: 500,
+              width: 500,
+            }}
+          />
+        </div>
       </article>
     </main>
   )

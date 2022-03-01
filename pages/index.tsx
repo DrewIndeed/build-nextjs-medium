@@ -11,7 +11,7 @@ interface Props {
 
 function Home({ posts }: Props) {
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-7xl scrollbar-hide">
       <Head>
         <title>Medium Blog with NextJS</title>
         <link rel="icon" href="/favicon.ico" />
