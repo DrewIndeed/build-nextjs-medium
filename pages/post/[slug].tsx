@@ -27,6 +27,10 @@ function Post({ post }: Props) {
     formState: { errors },
   } = useForm<IFormInput>()
 
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    console.log(data)
+  }
+
   return (
     <main className="mx-auto max-w-7xl scrollbar-hide">
       <Header />
@@ -97,7 +101,10 @@ function Post({ post }: Props) {
       <hr className="my-10 mx-auto max-w-3xl border-2 border-yellow-200" />
 
       {/* Comment section */}
-      <form className="mx-auto mb-10 flex max-w-3xl flex-col p-5 duration-500 hover:shadow-2xl">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mx-auto mb-10 flex max-w-3xl flex-col p-5 duration-500 hover:shadow-2xl"
+      >
         <h3 className="text-md text-yellow-500">Enjoy this article</h3>
         <h4 className="font-bond text-3xl">Leave a comment below!</h4>
         <hr className="mt-2 py-3" />
@@ -107,9 +114,9 @@ function Post({ post }: Props) {
         <label className="mb-5 block">
           <span className="text-gray-600">Name</span>
           <input
-            {...(register('name'), { required: true })}
+            {...register('name', { required: true })}
             type="text"
-            placeholder="Be here for a while"
+            placeholder="Fill in your name"
             className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
           />
         </label>
@@ -117,9 +124,9 @@ function Post({ post }: Props) {
         <label className="mb-5 block">
           <span className="text-gray-600">Email</span>
           <input
-            {...(register('email'), { required: true })}
-            type="text"
-            placeholder="Be here for a while"
+            {...register('email', { required: true })}
+            type="email"
+            placeholder="Fill in your email"
             className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
           />
         </label>
@@ -127,10 +134,10 @@ function Post({ post }: Props) {
         <label className="mb-5 block">
           <span className="text-gray-600">Comment</span>
           <textarea
-            {...(register('comment'), { required: true })}
+            {...register('comment', { required: true })}
             style={{ resize: 'none' }}
             rows={8}
-            placeholder="Be here for a while"
+            placeholder="What would you like to let me know?"
             className="form-textarea mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
           />
         </label>
