@@ -103,10 +103,6 @@ function Post({ post }: Props) {
                 </a>
               ),
             }}
-            imageOptions={{
-              height: 500,
-              width: 500,
-            }}
           />
         </div>
       </article>
