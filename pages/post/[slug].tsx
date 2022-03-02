@@ -6,12 +6,27 @@ import { sanityClient, urlFor } from '../../sanity'
 import { Post } from '../../typings'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
+// declare the form template to pass in useForm the let the form knows it only had these types
+interface IFormInput {
+  _id: string
+  name: string
+  email: string
+  comment: string
+}
+
 interface Props {
   post: Post
 }
 
 function Post({ post }: Props) {
   console.log(post)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>()
+
   return (
     <main className="mx-auto max-w-7xl scrollbar-hide">
       <Header />
@@ -87,9 +102,12 @@ function Post({ post }: Props) {
         <h4 className="font-bond text-3xl">Leave a comment below!</h4>
         <hr className="mt-2 py-3" />
 
+        <input type="hidden" value={post._id} {...register('_id')} />
+
         <label className="mb-5 block">
           <span className="text-gray-600">Name</span>
           <input
+            {...(register('name'), { required: true })}
             type="text"
             placeholder="Be here for a while"
             className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
@@ -99,6 +117,7 @@ function Post({ post }: Props) {
         <label className="mb-5 block">
           <span className="text-gray-600">Email</span>
           <input
+            {...(register('email'), { required: true })}
             type="text"
             placeholder="Be here for a while"
             className="form-input mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
@@ -108,12 +127,32 @@ function Post({ post }: Props) {
         <label className="mb-5 block">
           <span className="text-gray-600">Comment</span>
           <textarea
+            {...(register('comment'), { required: true })}
             style={{ resize: 'none' }}
             rows={8}
             placeholder="Be here for a while"
             className="form-textarea mt-1 block w-full rounded border py-2 px-3 shadow focus:outline-yellow-200"
           />
         </label>
+
+        {/* handle failed validation here */}
+        <div className="flex flex-col p-5">
+          {errors.name && (
+            <span className="text-red-500">- Name is required</span>
+          )}
+          {errors.email && (
+            <span className="text-red-500">- Email is required</span>
+          )}
+          {errors.comment && (
+            <span className="text-red-500">- Comment is required</span>
+          )}
+        </div>
+
+        {/* submit button */}
+        <input
+          type="submit"
+          className="focus:shadow-outline cursor-pointer rounded bg-yellow-500 py-2 px-4 font-bold text-white shadow hover:bg-yellow-400 focus:outline-none"
+        />
       </form>
     </main>
   )
