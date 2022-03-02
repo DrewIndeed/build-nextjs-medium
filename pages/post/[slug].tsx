@@ -124,7 +124,7 @@ function Post({ post }: Props) {
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="mx-auto mb-10 flex max-w-3xl flex-col p-5 duration-500 hover:shadow-2xl"
+          className="mx-auto mb-10 flex max-w-3xl flex-col p-5 duration-500 hover:shadow-2xl hover:shadow-green-200"
         >
           <h3 className="text-md text-yellow-500">Enjoy this article</h3>
           <h4 className="font-bond text-3xl">Leave a comment below!</h4>
@@ -183,6 +183,20 @@ function Post({ post }: Props) {
           />
         </form>
       )}
+
+      {/* approved comments */}
+      <div className="my-10 mx-auto flex max-w-3xl flex-col space-y-2 p-10 shadow shadow-green-200">
+        <h3 className="text-4xl ">Comments</h3>
+        <hr className="mb-2" />
+        {post.comments.map((comment) => (
+          <div key={comment._id}>
+            <p>
+              <span className="text-yellow-500">{comment.name}</span> said{' '}
+              {`"${comment.comment}"`}
+            </p>
+          </div>
+        ))}
+      </div>
     </main>
   )
 }
