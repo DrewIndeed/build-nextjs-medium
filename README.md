@@ -2,6 +2,14 @@
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
 
+## Screenshots of User Interfaces
+
+![Imgur](https://i.imgur.com/nrfMLie.png)
+
+![Imgur](https://i.imgur.com/C4SbXbT.png)
+
+![Imgur](https://i.imgur.com/K1DFloN.png)
+
 ## Preview
 
 Preview the example live on [StackBlitz](http://stackblitz.com/):
